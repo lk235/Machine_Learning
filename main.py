@@ -2,7 +2,8 @@ from prep_terrain_data import makeTerrainData
 from class_vis import prettyPicture, output_image
 from ClassifyNB import classify
 from ClassifyNB import classify_svm
-
+from ClassifyNB import *
+from sklearn.metrics import accuracy_score
 import numpy as np
 import pylab as pl
 
@@ -22,13 +23,21 @@ bumpy_slow = [features_train[ii][1] for ii in range(0, len(features_train)) if l
 # Be sure to change to that code tab to complete this quiz.
 clf = classify(features_train, labels_train)
 clf_svm = classify_svm(features_train, labels_train)
+clf_tree_min_samples_split_2 = classify_tree_min_samples_split_2(features_train, labels_train)
+clf_tree_min_samples_split_50 = classify_tree_min_samples_split_50(features_train, labels_train)
 print type(clf)
 
 
 
 ### draw the decision boundary with the text points overlaid
-prettyPicture(clf_svm, features_test, labels_test)
+prettyPicture(clf_tree_min_samples_split_50, features_test, labels_test)
 output_image("test.png", "png", open("test.png", "rb").read())
+
 
 #prettyPicture(clf_svm, features_test, labels_test)
 #output_image("test_svm.png", "png", open("test_svm.png", "rb").read())
+accuracy1 = accuracy_score(labels_test,clf_tree_min_samples_split_2.predict(features_test))
+accuracy2 = accuracy_score(labels_test,clf_tree_min_samples_split_50.predict(features_test))
+print accuracy1
+print accuracy2
+#print clf_tree.score(features_test, labels_test)
