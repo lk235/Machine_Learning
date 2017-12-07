@@ -22,4 +22,23 @@ def classify_tree_min_samples_split_50(features_train, labels_train):
     clf.fit(features_train, labels_train)
     return clf
 
+def classify_knn(features_train, labels_train):
+    from sklearn.neighbors import KNeighborsClassifier
+    clf = KNeighborsClassifier(n_neighbors=3)
+    clf.fit(features_train,labels_train)
+    return clf
+
+def classify_RF(features_train, labels_train):
+    from sklearn.ensemble import RandomForestClassifier
+    clf = RandomForestClassifier(n_estimators=10)
+    clf.fit(features_train,labels_train)
+    return clf
+
+def classify_ADA(features_train, labels_train):
+    from sklearn.ensemble import AdaBoostClassifier
+    clf = AdaBoostClassifier(n_estimators=100)
+    clf.fit(features_train, labels_train)
+    return clf
+
+
 ### your code goes here!
